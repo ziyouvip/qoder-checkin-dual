@@ -1,0 +1,17 @@
+# 运行时生成的凭据文件（含 token / 设备标识），绝不入库
+config.json
+accounts.json
+.qoder_token_cache.json
+*.tmp
+
+# 盒子创建的本地运行环境
+.venv/
+node_modules/
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+
+# 本地测试产物
+.test-*.json
+.test-out.json

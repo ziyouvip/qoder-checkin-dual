@@ -1,0 +1,58 @@
+[bmscriptsbox]
+
+[bmscriptsbox.info]
+id = "229931b0-28a4-44b7-a95d-6427948be47d"
+name = "Qoder 每日签到（国际版+国内版）"
+desc = "Qoder 每天领 Credits，国际版与国内版同时支持 | 自动提取设备标识与 token、按账号各自打对应端点、token 自动续期、多账号、零第三方依赖，可交给盒子定时无人值守运行"
+icon = "icon/logo.png"
+version = "2.0.0"
+
+[bmscriptsbox.runtime]
+language = "python"
+language_version = ">=3.8"
+entry = "main.py"
+terminal = "always"
+
+[bmscriptsbox.schedule]
+enabled = true
+
+[bmscriptsbox.params_form]
+enabled = true
+
+[[bmscriptsbox.params]]
+name = "mode"
+label = "运行模式"
+type = "str"
+default = "auto"
+choices = ["auto", "checkin", "extract"]
+choice_labels = { auto = "自动（提取+签到）", checkin = "仅签到", extract = "仅提取 Token" }
+required = false
+description = "auto＝检测到 Qoder 客户端时先提取设备标识/token 再签到，没有客户端则直接用已有 accounts.json 签到；checkin＝只签到；extract＝只提取并写回配置。"
+
+[[bmscriptsbox.params]]
+name = "edition"
+label = "签到范围"
+type = "str"
+default = "auto"
+choices = ["auto", "intl", "cn"]
+choice_labels = { auto = "国际版 + 国内版", intl = "仅国际版", cn = "仅国内版" }
+required = false
+description = "auto＝两个版本都签（每个账号自动按自己的接口地址走）；intl/cn＝只处理该版本的账号。账号的接口地址由提取时写入，不依赖此项。"
+
+[[bmscriptsbox.params]]
+name = "base_url"
+label = "备用接口地址"
+type = "str"
+default = "https://openapi.qoder.com.cn"
+choices = ["https://openapi.qoder.com.cn", "https://openapi.qoder.sh"]
+choice_labels = { "https://openapi.qoder.com.cn" = "国内版", "https://openapi.qoder.sh" = "国际版" }
+required = false
+description = "仅当账号没有自己的 baseUrl 时（例如手写 accounts.json）才使用；自动提取的账号会带上各自正确的接口地址。"
+
+[[bmscriptsbox.params]]
+name = "refresh_margin_h"
+label = "提前续期(小时)"
+type = "int"
+default = 72
+required = false
+description = "accessToken 距离过期不足这么多小时就主动续期；不清楚就保持 72。"

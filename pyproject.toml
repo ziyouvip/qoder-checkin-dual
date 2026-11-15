@@ -1,0 +1,6 @@
+[project]
+name = "qoder-checkin-dual"
+version = "2.0.0"
+description = "Qoder 每日签到（国际版 + 国内版）· 不忙脚本盒子脚本"
+requires-python = ">=3.8"
+dependencies = []
